@@ -89,11 +89,6 @@ window.showPixModal = function(amount, planName, redirectUrl, pixPayload, qrCode
           <div class="status-pulse"></div>
           <span>Aguardando confirmação do pagamento no banco...</span>
         </div>
-
-        <!-- Botão para simular confirmação no teste -->
-        <button onclick="window.simulatePixSuccess('${redirectUrl}')" class="btn-sim-pay-test">
-          ✅ [SIMULAÇÃO DE TESTE] CLIQUE AQUI PARA SIMULAR PAGAMENTO CONFIRMADO
-        </button>
       </div>
     </div>
   `;
@@ -158,20 +153,6 @@ window.startPixTimer = function() {
   }, 1000);
 };
 
-window.simulatePixSuccess = function(redirectUrl) {
-  const statusArea = document.getElementById('omegaStatusArea');
-  if (statusArea) {
-    statusArea.innerHTML = `
-      <div style="background: rgba(0, 230, 118, 0.15); border: 1px solid #00e676; padding: 10px; border-radius: 8px; color: #00e676; font-weight: 800; font-size: 0.95rem;">
-        ✓ PAGAMENTO CONFIRMADO PELA OMEGAPAY! Redirecionando...
-      </div>
-    `;
-  }
-  setTimeout(() => {
-    window.location.href = redirectUrl || 'verificacao.html';
-  }, 1500);
-};
-
 window.injectOmegaCss = function() {
   if (document.getElementById('omegaModalStyles')) return;
   const style = document.createElement('style');
@@ -223,19 +204,13 @@ window.injectOmegaCss = function() {
     .omega-timer-box { font-size: 0.8rem; color: #ff5500; margin-bottom: 15px; }
     .omega-footer-status {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      font-size: 0.82rem; color: #aaa; margin-bottom: 15px;
+      font-size: 0.82rem; color: #aaa; margin-bottom: 5px;
     }
     .status-pulse {
       width: 10px; height: 10px; background: #00e676; border-radius: 50%;
       box-shadow: 0 0 10px #00e676; animation: pulsePix 1.5s infinite;
     }
     @keyframes pulsePix { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } }
-    .btn-sim-pay-test {
-      background: rgba(0, 230, 118, 0.1); border: 1px solid #00e676; color: #00e676;
-      font-weight: 800; font-size: 0.82rem; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%;
-      margin-top: 5px; transition: all 0.2s ease;
-    }
-    .btn-sim-pay-test:hover { background: rgba(0, 230, 118, 0.25); }
   `;
   document.head.appendChild(style);
 };
