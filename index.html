@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conteúdo Exclusivo VIP - Acesso Restrito (+18)</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Modal de Verificação de Idade +18 -->
+  <div id="ageModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="logo logo-modal">
+        PRIVACY<span class="badge">HUB</span>
+      </div>
+      <div class="modal-badge-18">+18</div>
+      <h2>AVISO DE CONTEÚDO ADULTO</h2>
+      <p>Este site contém material restrito para maiores de idade. Para prosseguir, confirme que você possui 18 anos ou mais.</p>
+      
+      <div class="modal-actions">
+        <button id="btnAgeYes" class="btn btn-primary btn-block">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          SIM, SOU MAIOR DE 18 ANOS
+        </button>
+        <button id="btnAgeNo" class="btn btn-secondary btn-block">NÃO / SAIR DO SITE</button>
+      </div>
+      <span class="modal-footer-note">🔒 Navegação segura e sigilosa</span>
+    </div>
+  </div>
+
+  <!-- Barra Topo de Urgência -->
+  <div class="urgency-bar">
+    <span>🔥 <strong>OFERTA LIMITADA:</strong> Apenas <span id="spotsCount">7</span> vagas restantes com desconto VIP de lançamento!</span>
+  </div>
+
+  <!-- Cabeçalho / Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        PRIVACY<span class="badge">HUB</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#acervo">Acervo VIP</a>
+        <a href="#previas">Prévias</a>
+        <a href="#vantagens">Vantagens</a>
+        <a href="#planos">Planos VIP</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+      <a href="#planos" class="btn btn-primary btn-sm">ASSINAR AGORA</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-tag">🔞 CONTEÚDO EXCLUSIVO E SEM CENSURA</div>
+      <h1 class="hero-title">Acesse o Melhor Conteúdo VIP <span class="text-highlight">Sem Limites</span></h1>
+      <p class="hero-subtitle">Vídeos diários em 4K Ultra HD, fotos inéditas e interação direta. Assine hoje e liberte seu desejo com total privacidade e pagamento discreto via Pix.</p>
+
+      <!-- Player Teaser Interativo -->
+      <div class="video-teaser-container">
+        <video autoplay loop muted playsinline controls class="video-teaser-element">
+          <source src="privicyhub.mp4" type="video/mp4">
+          Seu navegador não suporta o formato de vídeo.
+        </video>
+        <div class="video-badge">PRÉVIA EXCLUSIVA VIP</div>
+      </div>
+
+      <!-- Botão CTA de Desbloqueio Abaixo do Vídeo -->
+      <div class="video-cta-wrapper">
+        <a href="#planos" class="btn btn-primary btn-glow btn-lg btn-block-mobile">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          DESBLOQUEAR ACESSO COMPLETO AGORA
+        </a>
+      </div>
+
+      <!-- Cronômetro Regressivo -->
+      <div class="timer-card">
+        <p class="timer-label">⏱️ Desconto especial expira em:</p>
+        <div class="timer-display">
+          <div class="time-box"><span id="timerHours">00</span><small>Horas</small></div>
+          <span class="timer-colon">:</span>
+          <div class="time-box"><span id="timerMinutes">14</span><small>Minutos</small></div>
+          <span class="timer-colon">:</span>
+          <div class="time-box"><span id="timerSeconds">59</span><small>Segundos</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner Sigilo & Pagamento Discreto -->
+  <section class="discreet-banner">
+    <div class="container discreet-grid">
+      <div class="discreet-item">
+        <div class="discreet-icon">🔒</div>
+        <div>
+          <h4>Cobrança 100% Discreta</h4>
+          <p>No comprovante da sua transferência Pix aparecerá apenas um nome genérico (ex: <em>PAG*DIGITAL</em>).</p>
+        </div>
+      </div>
+      <div class="discreet-item">
+        <div class="discreet-icon">⚡</div>
+        <div>
+          <h4>Acesso Imediato</h4>
+          <p>Receba seu login e senha direto no e-mail ou WhatsApp logo após a aprovação.</p>
+        </div>
+      </div>
+      <div class="discreet-item">
+        <div class="discreet-icon">🛡️</div>
+        <div>
+          <h4>Garantia Incondicional</h4>
+          <p>Satisfação garantida ou seu dinheiro de volta sem complicações.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Conteúdo Completo do Acervo -->
+  <section id="acervo" class="acervo-section section-padding bg-darker">
+    <div class="container">
+      <div class="section-header">
+        <span class="acervo-tag">🇧🇷 O MAIOR DO BRASIL</span>
+        <h2>Libere Agora o Maior e Mais Completo Acervo de Conteúdo do 🇧🇷</h2>
+        <p>Tudo o que você procura reunido em um único portal exclusivo no Telegram.</p>
+      </div>
+
+      <!-- Categorias do Acervo -->
+      <div class="acervo-grid">
+        <div class="acervo-card">
+          <span class="acervo-emoji">😈</span>
+          <span>Faveladas Gostosas</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">👩‍🎓</span>
+          <span>Novinhas de Faculdade</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">🔥</span>
+          <span>Magrinhas Peituda</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">🏠</span>
+          <span>Faveladas no barraco</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">😱</span>
+          <span>Esposa traindo por diversão</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">💋</span>
+          <span>Gostosas com marquinha de fita</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">📸</span>
+          <span>Rabudas se exibindo para amante</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">🚗</span>
+          <span>Trepadando dentro do carro</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">👀</span>
+          <span>Caiu na net vazados</span>
+        </div>
+        <div class="acervo-card">
+          <span class="acervo-emoji">😈</span>
+          <span>Áudio de gemidos altos</span>
+        </div>
+      </div>
+
+      <!-- Caixa de Bônus Exclusivos -->
+      <div class="bonus-box">
+        <div class="bonus-header">
+          <span class="bonus-icon">🎁</span>
+          <h3>BÔNUS EXCLUSIVOS INCLUSOS HOJE</h3>
+        </div>
+        <div class="bonus-list">
+          <div class="bonus-item">
+            <span class="bonus-check">✅</span>
+            <div>
+              <strong>90 MIL MÍDIAS BRUTAS PARA ASSISTIR</strong>
+              <p>Milhares de fotos e vídeos em altíssima resolução prontos para assistir.</p>
+            </div>
+          </div>
+          <div class="bonus-item">
+            <span class="bonus-check">✅</span>
+            <div>
+              <strong>PAINEL DE TODOS OS PRIVACY E ONLYFANS</strong>
+              <p>Acesso unificado aos melhores perfis das criadoras mais cobiçadas.</p>
+            </div>
+          </div>
+          <div class="bonus-item">
+            <span class="bonus-check">✅</span>
+            <div>
+              <strong>ATUALIZAÇÃO DE 100 NOVOS VÍDEOS POR SEMANA</strong>
+              <p>Novos conteúdos adicionados semanalmente sem custo adicional.</p>
+            </div>
+          </div>
+        </div>
+        <div class="center-cta" style="margin-top: 25px;">
+          <a href="#planos" class="btn btn-primary btn-glow btn-lg">GARANTIR TODOS OS BÔNUS AGORA</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prévias do Conteúdo Grid -->
+  <section id="previas" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>Confira uma Prévia do que te Espera</h2>
+        <p>Centenas de mídias novas adicionadas toda semana no seu portal VIP.</p>
+      </div>
+
+      <div class="media-grid">
+        <!-- Card 1 -->
+        <div class="media-card">
+          <div class="media-thumb-video">
+            <video autoplay loop muted playsinline class="card-video-element">
+              <source src="previa01.mp4" type="video/mp4">
+            </video>
+            <span class="badge-quality">4K Ultra HD</span>
+            <div class="card-blur-overlay">
+              <span class="lock-sm">🔒 PRÉVIA VIP #01</span>
+            </div>
+          </div>
+          <div class="media-info">
+            <h3>Prévia Exclusiva #01</h3>
+            <p>Vídeo liberado no acervo completo sem cortes.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="media-card">
+          <div class="media-thumb-video">
+            <video autoplay loop muted playsinline class="card-video-element">
+              <source src="previa02.mp4" type="video/mp4">
+            </video>
+            <span class="badge-quality">FULL HD</span>
+            <div class="card-blur-overlay">
+              <span class="lock-sm">🔒 PRÉVIA VIP #02</span>
+            </div>
+          </div>
+          <div class="media-info">
+            <h3>Prévia Exclusiva #02</h3>
+            <p>Conteúdo inédito adicionado esta semana.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="media-card">
+          <div class="media-thumb-video">
+            <video autoplay loop muted playsinline class="card-video-element">
+              <source src="previa03.mp4" type="video/mp4">
+            </video>
+            <span class="badge-quality">4K Ultra HD</span>
+            <div class="card-blur-overlay">
+              <span class="lock-sm">🔒 PRÉVIA VIP #03</span>
+            </div>
+          </div>
+          <div class="media-info">
+            <h3>Prévia Exclusiva #03</h3>
+            <p>Mídia em altíssima definição 60fps.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="media-card">
+          <div class="media-thumb-video">
+            <video autoplay loop muted playsinline class="card-video-element">
+              <source src="previa04.mp4" type="video/mp4">
+            </video>
+            <span class="badge-quality">4K Ultra HD</span>
+            <div class="card-blur-overlay">
+              <span class="lock-sm">🔒 PRÉVIA VIP #04</span>
+            </div>
+          </div>
+          <div class="media-info">
+            <h3>Prévia Exclusiva #04</h3>
+            <p>Acesse o grupo VIP no Telegram para assistir tudo.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="center-cta">
+        <a href="#planos" class="btn btn-primary btn-glow">QUERO VER TUDO SEM LIMITES</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vantagens do Clube -->
+  <section id="vantagens" class="section-padding bg-darker">
+    <div class="container">
+      <div class="section-header">
+        <h2>Por que Entrar no Nosso Clube VIP?</h2>
+        <p>Uma experiência completa feita para quem busca o melhor conteúdo sem enrolação.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h3>Atualizações Diárias</h3>
+          <p>Novos vídeos e fotos postados todos os dias sem falta. Você nunca fica sem novidades.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📲</div>
+          <h3>Grupo Privado no Telegram</h3>
+          <p>Acesso direto ao canal VIP no Telegram para assistir no celular onde e quando quiser.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💎</div>
+          <h3>Qualidade 4K Ultra HD</h3>
+          <p>Todas as mídias em altíssima definição de imagem e áudio límpido.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Privacidade Absoluta</h3>
+          <p>Nenhum dado seu é compartilhado. Pagamento discreto sem nome do site no extrato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos de Assinatura -->
+  <section id="planos" class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>Escolha Seu Plano de Acesso VIP</h2>
+        <p>Selecione a opção ideal para você e receba o acesso imediato.</p>
+
+        <!-- Banner Destaque Telegram -->
+        <div class="telegram-delivery-banner">
+          <div class="telegram-icon-circle">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="#ffffff">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8.01-3.45 3.82-1.59 4.61-1.87 5.13-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.24-.04.42z"/>
+            </svg>
+          </div>
+          <div class="telegram-banner-text">
+            <strong>🚀 Entrega 100% Automática pelo Telegram</strong>
+            <p>Seu link exclusivo de acesso ao Canal VIP é enviado instantaneamente pro seu e-mail e WhatsApp logo após a confirmação do pagamento!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plano Mensal -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>PLANO MENSAL</h3>
+            <p>Para quem quer experimentar</p>
+          </div>
+          <div class="pricing-price">
+            <span class="currency">R$</span>
+            <span class="price-val">9</span>
+            <span class="cents">,90</span>
+            <span class="period">/mês</span>
+          </div>
+          <ul class="pricing-features">
+            <li>✔️ Acesso à área VIP por 30 dias</li>
+            <li>✔️ Mais de 350 vídeos disponíveis</li>
+            <li>✔️ Qualidade Full HD</li>
+            <li>✔️ Cobrança discreta</li>
+            <li>
+              <span class="tg-inline-badge">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8.01-3.45 3.82-1.59 4.61-1.87 5.13-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.24-.04.42z"/></svg>
+                <strong>Entregue via Telegram</strong>
+              </span>
+            </li>
+          </ul>
+          <!-- Botão Checkout OmegaPay (Plano Mensal - R$ 9,90) -->
+          <button onclick="processOmegaPayPix(9.90, 'Plano Mensal VIP', 'verificacao.html')" class="btn btn-secondary btn-block">ASSINAR MENSAL — R$ 9,90</button>
+        </div>
+
+        <!-- Plano VIP VITALÍCIO (Destaque) -->
+        <div class="pricing-card featured">
+          <div class="ribbon">MAIS POPULAR</div>
+          <div class="pricing-header">
+            <h3>VIP VITALÍCIO / ANUAL</h3>
+            <p>Acesso ilimitado e sem mensalidades</p>
+          </div>
+          <div class="pricing-price">
+            <span class="old-price">De R$ 97,00 por apenas</span>
+            <div>
+              <span class="currency">R$</span>
+              <span class="price-val">19</span>
+              <span class="cents">,90</span>
+              <span class="period">/pagamento único</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li>✔️ <strong>Acesso Vitalício sem renovação</strong></li>
+            <li>✔️ Todos os vídeos em <strong>4K Ultra HD</strong></li>
+            <li>
+              <span class="tg-inline-badge active">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8.01-3.45 3.82-1.59 4.61-1.87 5.13-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.24-.04.42z"/></svg>
+                <strong>Grupo & Canal VIP Telegram Incluso</strong>
+              </span>
+            </li>
+            <li>✔️ Atualizações diárias pra sempre</li>
+            <li>✔️ Suporte prioritário 24/7</li>
+            <li>✔️ <strong>Cobrança 100% discreta</strong></li>
+          </ul>
+          <!-- Botão Checkout OmegaPay (Plano Vitalício - R$ 19,90) -->
+          <button onclick="processOmegaPayPix(19.90, 'Plano Vitalício VIP', 'verificacao.html')" class="btn btn-primary btn-glow btn-block btn-lg">GARANTIR ACESSO VITALÍCIO — R$ 19,90</button>
+          <span class="security-tag">🔒 Checkout Seguro & Acesso Automático via PIX (Instantâneo)</span>
+        </div>
+      </div>
+
+      <!-- Métodos de Pagamento -->
+      <div class="payment-methods">
+        <p>Pagamento 100% via PIX com aprovação e liberação imediata 24 horas:</p>
+        <div class="payment-icons">
+          <span class="pay-badge pix" style="background: rgba(0, 230, 118, 0.15); border: 1px solid rgba(0, 230, 118, 0.4); color: #00e676; font-size: 0.95rem; padding: 10px 24px;">⚡ PIX (Aprovação e Envio Imediato 24h)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos / Prova Social -->
+  <section class="section-padding bg-darker">
+    <div class="container">
+      <div class="section-header">
+        <h2>O que Nossos Membros VIP Dizem</h2>
+        <p>Veja a opinião de quem já faz parte do clube exclusivo.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Conteúdo insano! Valeu cada centavo do plano vitalício. O acesso no Telegram facilita demais pra assistir no celular."</p>
+          <div class="author">
+            <div class="avatar">R</div>
+            <div>
+              <strong>Ricardo M.</strong>
+              <span>Membro VIP há 4 meses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Estava com medo de aparecer o nome do site no meu extrato do Pix, mas veio super discreto como PAG*DIGITAL. Parabéns pelo respeito à privacidade."</p>
+          <div class="author">
+            <div class="avatar">F</div>
+            <div>
+              <strong>Felipe S.</strong>
+              <span>Membro VIP há 2 meses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Qualidade de imagem absurda em 4K. Atualiza todo santo dia. Melhor investimento que fiz esse mês!"</p>
+          <div class="author">
+            <div class="avatar">L</div>
+            <div>
+              <strong>Lucas T.</strong>
+              <span>Membro Vitalício</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section id="faq" class="section-padding">
+    <div class="container faq-container">
+      <div class="section-header">
+        <h2>Perguntas Frequentes</h2>
+        <p>Tire suas dúvidas antes de assinar.</p>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>1. O nome do site vai aparecer no meu extrato do Pix?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p><strong>Não!</strong> Sua privacidade é nossa prioridade absoluta. No comprovante da sua transferência Pix aparecerá apenas um nome neutro e discreto (exemplo: <em>PAG*SERVICOSDIGITAIS</em> ou <em>PAYMENT*HUB</em>).</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>2. Como recebo meu acesso após o pagamento?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>O acesso é 100% automático e imediato. Pagando via PIX, você receberá um e-mail com seus dados de login e o link direto do nosso canal VIP do Telegram em menos de 1 minuto.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>3. Posso cancelar quando quiser?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>Sim! Não temos fidelidade nos planos recorrentes. No plano Vitalício, você paga apenas uma única vez e o acesso é seu para sempre.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span>4. Funciona no celular e na Smart TV?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content">
+            <p>Sim! Nossa plataforma é completamente otimizada para smartphones (iPhone e Android), tablets, computadores e Smart TVs através do navegador ou Telegram.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-cta" style="margin-top: 40px;">
+        <a href="#planos" class="btn btn-primary btn-lg btn-glow">QUERO ACESSAR O CLUBE VIP AGORA</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="logo logo-footer">
+        PRIVACY<span class="badge">HUB</span>
+      </div>
+      <p class="footer-disclaimer">
+        🔞 Este site contém conteúdo exclusivo para maiores de 18 anos. Todos os modelos apresentados no site são maiores de idade (+18) e consentiram com a produção e distribuição do material.
+      </p>
+      <div class="footer-links">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">DMCA / Remover Conteúdo</a>
+        <a href="#">Contato Suporte</a>
+      </div>
+      <p class="copyright">&copy; 2026 PRIVACYHUB. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="omegapay-integration.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

