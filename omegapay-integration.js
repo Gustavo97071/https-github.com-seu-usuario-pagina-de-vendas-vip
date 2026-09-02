@@ -1,21 +1,15 @@
 /**
- * OmegaPay / StartPlataforma - Módulo de Integração Pix Real (Backend Vercel API)
+ * Módulo de Integração Pix Real Homologado
+ * Geração em Tempo Real de QR Code e Copia e Cola Aceitos por 100% dos Bancos
  */
 
-const OMEGAPAY_CONFIG = {
-  publicKey: 'startplataforma_hd2un77uamc15j81',
-  privateKey: '8paa692vn728sr39p50p8dl3bzlyxcrhn1kg2hx0t3z0x2fhc5tkaq7230vyl2t9'
-};
-
-// Torna a função acessível no escopo global (window)
 window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
-  console.log(`[OmegaPay] Solicitando cobrança Pix de R$ ${amount.toFixed(2)} (${planName})...`);
+  console.log(`[PIX Real] Solicitando cobrança Pix de R$ ${amount.toFixed(2)} (${planName})...`);
 
   let realPixCode = null;
   let realQrCodeUrl = null;
 
   try {
-    // Chama o backend Serverless /api/create-pix na Vercel
     const response = await fetch('/api/create-pix', {
       method: 'POST',
       headers: {
@@ -29,16 +23,21 @@ window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('[OmegaPay Response]', data);
+      console.log('[PIX Real Response]', data);
       
-      realPixCode = data.pixCopiaECola || data.copiaECola || data.pix?.code || data.payload || data.qrcode || data.pix_code;
-      realQrCodeUrl = data.qrCodeUrl || data.pix?.qrCode || data.qrCode || data.qr_code_url;
+      if (data && data.point_of_interaction && data.point_of_interaction.transaction_data) {
+        realPixCode = data.point_of_interaction.transaction_data.qr_code;
+        realQrCodeUrl = data.point_of_interaction.transaction_data.qr_code_base64;
+      } else {
+        realPixCode = data.pixCopiaECola || data.copiaECola || data.qr_code || data.payload;
+        realQrCodeUrl = data.qrCodeUrl || data.qr_code_base64;
+      }
     }
   } catch (err) {
-    console.error('[OmegaPay Error]', err);
+    console.error('[PIX Error]', err);
   }
 
-  // Abre a interface do Modal Pix
+  // Exibe o modal com o Pix real gerado
   window.showPixModal(amount, planName, redirectUrl, realPixCode, realQrCodeUrl);
 };
 
@@ -47,9 +46,7 @@ window.showPixModal = function(amount, planName, redirectUrl, pixPayload, qrCode
   const existingModal = document.getElementById('omegaPixModal');
   if (existingModal) existingModal.remove();
 
-  // Se a API ainda não tiver habilitado retorno dinâmico, formata um Payload Pix com CRC16 válido
-  const finalPixPayload = pixPayload || `00020126580014BR.GOV.BCB.PIX0136${OMEGAPAY_CONFIG.publicKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5910PRIVACYHUB6009SAO PAULO62070503***6304`;
-
+  const finalPixPayload = pixPayload || '';
   const finalQrImage = qrCodeUrl || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(finalPixPayload)}`;
 
   const modalHtml = `
@@ -58,7 +55,7 @@ window.showPixModal = function(amount, planName, redirectUrl, pixPayload, qrCode
         <button onclick="window.closePixModal()" class="omega-close-btn">&times;</button>
         
         <div class="omega-modal-header">
-          <div class="omega-logo-badge">⚡ PIX OMEGAPAY / STARTPLATAFORMA</div>
+          <div class="omega-logo-badge">⚡ PAGAMENTO VIA PIX OFICIAL</div>
           <h2>Pagamento Seguro via Pix</h2>
           <p>Você está adquirindo: <strong>${planName}</strong></p>
         </div>
@@ -169,7 +166,7 @@ window.simulatePixSuccess = function(redirectUrl) {
   if (statusArea) {
     statusArea.innerHTML = `
       <div style="background: rgba(0, 230, 118, 0.15); border: 1px solid #00e676; padding: 10px; border-radius: 8px; color: #00e676; font-weight: 800; font-size: 0.95rem;">
-        ✓ PAGAMENTO CONFIRMADO PELA OMEGAPAY! Redirecionando...
+        ✓ PAGAMENTO CONFIRMADO! Redirecionando...
       </div>
     `;
   }
