@@ -20,8 +20,8 @@ module.exports = async (req, res) => {
     const publicKey = 'startplataforma_hd2un77uamc15j81';
     const privateKey = '8paa692vn728sr39p50p8dl3bzlyxcrhn1kg2hx0t3z0x2fhc5tkaq7230vyl2t9';
 
-    // Requisição Server-to-Server para OmegaPayments
-    const omegaRes = await fetch('https://app.omegapayments.com.br/api/v1/gateway/transactions', {
+    // Requisição Server-to-Server para a rota oficial da OmegaPayments: /api/v1/gateway/checkout
+    const omegaRes = await fetch('https://app.omegapayments.com.br/api/v1/gateway/checkout', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${privateKey}`,
