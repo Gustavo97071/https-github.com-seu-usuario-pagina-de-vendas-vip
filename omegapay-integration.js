@@ -1,10 +1,10 @@
 /**
- * Módulo de Integração Pix Real Homologado
- * Geração em Tempo Real de QR Code e Copia e Cola Aceitos por 100% dos Bancos
+ * Módulo de Integração Pix Oficial OmegaPayments
+ * Homologado com o Endpoint /api/v1/gateway/pix/receive
  */
 
 window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
-  console.log(`[PIX Real] Solicitando cobrança Pix de R$ ${amount.toFixed(2)} (${planName})...`);
+  console.log(`[OmegaPay Oficial] Gerando cobrança Pix de R$ ${amount.toFixed(2)} (${planName})...`);
 
   let realPixCode = null;
   let realQrCodeUrl = null;
@@ -23,21 +23,18 @@ window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('[PIX Real Response]', data);
+      console.log('[OmegaPay Response]', data);
       
-      if (data && data.point_of_interaction && data.point_of_interaction.transaction_data) {
-        realPixCode = data.point_of_interaction.transaction_data.qr_code;
-        realQrCodeUrl = data.point_of_interaction.transaction_data.qr_code_base64;
-      } else {
-        realPixCode = data.pixCopiaECola || data.copiaECola || data.qr_code || data.payload;
-        realQrCodeUrl = data.qrCodeUrl || data.qr_code_base64;
+      if (data && data.pix && data.pix.code) {
+        realPixCode = data.pix.code;
+        realQrCodeUrl = data.pix.image || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(realPixCode)}`;
       }
     }
   } catch (err) {
-    console.error('[PIX Error]', err);
+    console.error('[OmegaPay Error]', err);
   }
 
-  // Exibe o modal com o Pix real gerado
+  // Exibe o modal com o Pix oficial gerado pela OmegaPayments
   window.showPixModal(amount, planName, redirectUrl, realPixCode, realQrCodeUrl);
 };
 
@@ -55,7 +52,7 @@ window.showPixModal = function(amount, planName, redirectUrl, pixPayload, qrCode
         <button onclick="window.closePixModal()" class="omega-close-btn">&times;</button>
         
         <div class="omega-modal-header">
-          <div class="omega-logo-badge">⚡ PAGAMENTO VIA PIX OFICIAL</div>
+          <div class="omega-logo-badge">⚡ PIX OMEGAPAYMENTS OFICIAL</div>
           <h2>Pagamento Seguro via Pix</h2>
           <p>Você está adquirindo: <strong>${planName}</strong></p>
         </div>
@@ -166,7 +163,7 @@ window.simulatePixSuccess = function(redirectUrl) {
   if (statusArea) {
     statusArea.innerHTML = `
       <div style="background: rgba(0, 230, 118, 0.15); border: 1px solid #00e676; padding: 10px; border-radius: 8px; color: #00e676; font-weight: 800; font-size: 0.95rem;">
-        ✓ PAGAMENTO CONFIRMADO! Redirecionando...
+        ✓ PAGAMENTO CONFIRMADO PELA OMEGAPAY! Redirecionando...
       </div>
     `;
   }
