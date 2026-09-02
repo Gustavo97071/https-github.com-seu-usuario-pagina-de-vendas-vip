@@ -4,9 +4,9 @@
  */
 
 const OMEGAPAY_CONFIG = {
-  publicKey: 'startplataforma_ei2oyd5mmbclbpy5',
-  privateKey: '8ph0a1y531w4tnvm6if94lgw07jozvqmmp6bfguymg78hx6mcjyagb7ay258av2j',
-  apiEndpoint: 'https://api.startplataforma.com.br/v1/pix',
+  publicKey: 'startplataforma_hd2un77uamc15j81',
+  privateKey: '8paa692vn728sr39p50p8dl3bzlyxcrhn1kg2hx0t3z0x2fhc5tkaq7230vyl2t9',
+  apiEndpoint: 'https://app.omegapayments.com.br/api/v1/gateway/checkout',
   sandbox: false
 };
 
