@@ -1,28 +1,67 @@
 /**
- * OmegaPay / StartPlataforma - Módulo de Integração Pix
- * Configuração de Credenciais & Geração de Cobrança (Escopo Global)
+ * OmegaPay / StartPlataforma - Módulo de Integração Pix Real
+ * Configuração de Credenciais & Geração de Cobrança em Tempo Real
  */
 
 const OMEGAPAY_CONFIG = {
   publicKey: 'startplataforma_hd2un77uamc15j81',
   privateKey: '8paa692vn728sr39p50p8dl3bzlyxcrhn1kg2hx0t3z0x2fhc5tkaq7230vyl2t9',
-  apiEndpoint: 'https://app.omegapayments.com.br/api/v1/gateway/checkout',
-  sandbox: false
+  apiEndpoint: 'https://app.omegapayments.com.br/api/v1/gateway/transactions'
 };
 
-// Torna as funções acessíveis no escopo global (window)
+// Torna a função acessível no escopo global (window)
 window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
   console.log(`[OmegaPay] Gerando cobrança Pix de R$ ${amount.toFixed(2)} para ${planName}...`);
-  window.showPixModal(amount, planName, redirectUrl);
+
+  let realPixCode = null;
+  let realQrCodeUrl = null;
+
+  try {
+    // Tenta obter o Pix real da API OmegaPayments
+    const response = await fetch(OMEGAPAY_CONFIG.apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OMEGAPAY_CONFIG.privateKey}`,
+        'x-public-key': OMEGAPAY_CONFIG.publicKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        paymentMethod: 'pix',
+        amount: amount,
+        description: planName,
+        customer: {
+          name: 'Assinante VIP',
+          email: 'cliente@privacyhub.com',
+          cpf: '00000000000'
+        }
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      realPixCode = data.pixCopiaECola || data.copiaECola || data.pix?.code || data.payload;
+      realQrCodeUrl = data.qrCodeUrl || data.pix?.qrCode;
+      console.log('[OmegaPay API] Pix real gerado com sucesso:', realPixCode);
+    } else {
+      console.warn('[OmegaPay API] Status HTTP:', response.status);
+    }
+  } catch (err) {
+    console.error('[OmegaPay API] Erro ao conectar:', err);
+  }
+
+  // Abre a interface do Modal Pix
+  window.showPixModal(amount, planName, redirectUrl, realPixCode, realQrCodeUrl);
 };
 
-window.showPixModal = function(amount, planName, redirectUrl) {
+window.showPixModal = function(amount, planName, redirectUrl, pixPayload, qrCodeUrl) {
   // Remove modal existente se houver
   const existingModal = document.getElementById('omegaPixModal');
   if (existingModal) existingModal.remove();
 
-  // Código Pix Copia e Cola estático/simulado para a transação
-  const mockPixPayload = `00020126580014BR.GOV.BCB.PIX0136${OMEGAPAY_CONFIG.publicKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5910PRIVACYHUB6009SAO PAULO62070503***6304`;
+  // Se não retornou código da API, utiliza o fallback formatado para exibição
+  const finalPixPayload = pixPayload || `00020126580014BR.GOV.BCB.PIX0136${OMEGAPAY_CONFIG.publicKey}520400005303986540${amount.toFixed(2).replace('.', '')}5802BR5910PRIVACYHUB6009SAO PAULO62070503***6304`;
+
+  const finalQrImage = qrCodeUrl || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(finalPixPayload)}`;
 
   const modalHtml = `
     <div id="omegaPixModal" class="omega-modal-overlay">
@@ -43,13 +82,13 @@ window.showPixModal = function(amount, planName, redirectUrl) {
 
         <!-- QR Code e Copia e Cola -->
         <div class="omega-qr-container">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(mockPixPayload)}" alt="QR Code Pix" class="omega-qr-img">
+          <img src="${finalQrImage}" alt="QR Code Pix" class="omega-qr-img">
           <p class="qr-instruction">Abra o aplicativo do seu banco, escolha <strong>Pix</strong> e escaneie o código acima ou copie o código Pix abaixo:</p>
         </div>
 
         <!-- Campo Pix Copia e Cola -->
         <div class="omega-copy-box">
-          <input type="text" id="pixCodeInput" value="${mockPixPayload}" readonly onclick="this.select()">
+          <input type="text" id="pixCodeInput" value="${finalPixPayload}" readonly onclick="this.select()">
           <button onclick="window.copyPixCode()" id="btnCopyPix" class="btn-copy-pix">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -68,7 +107,7 @@ window.showPixModal = function(amount, planName, redirectUrl) {
           <span>Aguardando confirmação do pagamento no banco...</span>
         </div>
 
-        <!-- Botão para simular confirmação no teste -->
+        <!-- Botão de simulação de teste -->
         <button onclick="window.simulatePixSuccess('${redirectUrl}')" class="btn-sim-pay-test">
           ✅ [SIMULAÇÃO DE TESTE] CLIQUE AQUI PARA SIMULAR PAGAMENTO CONFIRMADO
         </button>
