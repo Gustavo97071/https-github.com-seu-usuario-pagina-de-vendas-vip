@@ -41,7 +41,14 @@ module.exports = async (req, res) => {
       })
     });
 
-    const data = await omegaRes.json();
+    const rawText = await omegaRes.text();
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (e) {
+      data = { success: false, raw: rawText, status: omegaRes.status };
+    }
+
     return res.status(200).json(data);
 
   } catch (error) {
