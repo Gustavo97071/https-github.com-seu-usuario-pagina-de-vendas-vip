@@ -1,15 +1,66 @@
 /**
- * Módulo de Integração Pix Oficial OmegaPayments
- * Homologado com o Endpoint /api/v1/gateway/pix/receive
+ * Módulo de Integração Pix Oficial OmegaPayments + Meta Pixel & Conversions API (CAPI)
+ * Eventos: PageView, InitiateCheckout, Purchase (PIX GERADO = PURCHASE com Deduplicação)
  */
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
 window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
   console.log(`[OmegaPay Oficial] Gerando cobrança Pix de R$ ${amount.toFixed(2)} (${planName})...`);
+
+  const productId = amount === 19.90 ? 'plan_vitalicio' : (amount === 4.99 ? 'plan_verificacao' : 'plan_mensal');
+  const initiateEventId = `init_${Date.now()}_${Math.floor(Math.random() * 9000 + 1000)}`;
+
+  const fbp = getCookie('_fbp');
+  const fbc = getCookie('_fbc');
+
+  // 1. DISPARO DO EVENTO INITIATECHECKOUT (Navegador + Server CAPI)
+  if (window.fbq) {
+    fbq('track', 'InitiateCheckout', {
+      value: amount,
+      currency: 'BRL',
+      content_name: planName,
+      content_ids: [productId],
+      content_type: 'product'
+    }, {
+      eventID: initiateEventId
+    });
+    console.log('[Meta Pixel] InitiateCheckout disparado no browser | Event ID:', initiateEventId);
+  }
+
+  // CAPI Server-side para InitiateCheckout
+  try {
+    fetch('/api/track-event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        eventName: 'InitiateCheckout',
+        eventId: initiateEventId,
+        eventSourceUrl: window.location.href,
+        userData: { fbp, fbc },
+        customData: {
+          value: amount,
+          currency: 'BRL',
+          content_name: planName,
+          content_ids: [productId],
+          content_type: 'product'
+        }
+      })
+    });
+  } catch (err) {
+    console.warn('[Meta CAPI] Erro ao enviar InitiateCheckout:', err);
+  }
 
   let realPixCode = null;
   let realQrCodeUrl = null;
 
   try {
+    // 2. Chamada ao Backend Serverless para Gerar o PIX + CAPI Purchase
     const response = await fetch('/api/create-pix', {
       method: 'POST',
       headers: {
@@ -17,7 +68,10 @@ window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
       },
       body: JSON.stringify({
         amount: amount,
-        planName: planName
+        planName: planName,
+        productId: productId,
+        eventSourceUrl: window.location.href,
+        userData: { fbp, fbc }
       })
     });
 
@@ -28,13 +82,27 @@ window.processOmegaPayPix = async function(amount, planName, redirectUrl) {
       if (data && data.pix && data.pix.code) {
         realPixCode = data.pix.code;
         realQrCodeUrl = data.pix.image || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(realPixCode)}`;
+
+        // 3. REGRA ESPECÍFICA: PIX GERADO = PURCHASE (Disparo no Navegador com o MESMO Event ID)
+        if (data.meta_event_id && window.fbq) {
+          fbq('track', 'Purchase', {
+            value: amount,
+            currency: 'BRL',
+            content_name: planName,
+            content_ids: [productId],
+            content_type: 'product'
+          }, {
+            eventID: data.meta_event_id
+          });
+          console.log('[Meta Pixel] Purchase disparado no browser após geração do PIX | Event ID:', data.meta_event_id);
+        }
       }
     }
   } catch (err) {
     console.error('[OmegaPay Error]', err);
   }
 
-  // Exibe o modal com o Pix oficial gerado pela OmegaPayments
+  // 4. Exibe o modal com o Pix oficial gerado pela OmegaPayments
   window.showPixModal(amount, planName, redirectUrl, realPixCode, realQrCodeUrl);
 };
 

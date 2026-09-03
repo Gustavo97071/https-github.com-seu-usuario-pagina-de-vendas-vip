@@ -36,6 +36,10 @@
       "dest": "/api/create-pix.js"
     },
     {
+      "src": "/api/track-event",
+      "dest": "/api/track-event.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
