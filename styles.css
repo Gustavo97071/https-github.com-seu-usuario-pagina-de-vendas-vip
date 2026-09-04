@@ -1173,37 +1173,26 @@ input, select, textarea, button {
     display: none;
   }
 
-  .hero-section {
-    padding: 35px 0 30px 0;
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
   }
 
-  .hero-tag {
-    font-size: 0.75rem;
-    padding: 5px 12px;
-    margin-bottom: 14px;
+  .navbar .logo {
+    font-size: 1.25rem;
+    flex-shrink: 0;
   }
 
-  .hero-title {
-    font-size: 1.65rem;
-    line-height: 1.25;
-    margin-bottom: 12px;
-    word-wrap: break-word;
-  }
-
-  .hero-subtitle {
-    font-size: 0.88rem;
-    line-height: 1.45;
-    margin-bottom: 25px;
-  }
-
-  .video-teaser-container {
-    max-width: 100%;
-    margin: 0 auto 30px auto;
-    border-radius: var(--radius-md);
-  }
-
-  .video-cta-wrapper {
-    margin: -20px auto 30px auto;
+  .navbar .btn {
+    width: auto !important;
+    min-height: auto !important;
+    padding: 8px 14px !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .btn {
