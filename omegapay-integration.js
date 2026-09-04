@@ -229,54 +229,58 @@ window.injectOmegaCss = function() {
     .omega-modal-overlay {
       position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92);
       backdrop-filter: blur(10px); z-index: 999999;
-      display: flex; align-items: center; justify-content: center; padding: 15px;
-      overflow-y: auto;
+      display: flex; align-items: center; justify-content: center; padding: 12px;
+      overflow-y: auto; box-sizing: border-box;
     }
     .omega-modal-card {
-      background: #141419; border: 1px solid #2b2b36; border-radius: 20px;
-      padding: 28px 22px; max-width: 480px; width: 100%; text-align: center;
+      background: #141419; border: 1px solid #2b2b36; border-radius: 18px;
+      padding: 24px 16px; max-width: 440px; width: calc(100% - 8px); text-align: center;
       position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 35px rgba(255, 153, 0, 0.25);
+      max-height: 90dvh; overflow-y: auto; box-sizing: border-box;
     }
     .omega-close-btn {
-      position: absolute; top: 12px; right: 15px; background: none; border: none;
-      color: #888; font-size: 2rem; cursor: pointer; line-height: 1;
+      position: absolute; top: 10px; right: 10px; background: none; border: none;
+      color: #888; font-size: 1.8rem; cursor: pointer; line-height: 1;
+      min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; z-index: 10;
     }
     .omega-logo-badge {
       display: inline-block; background: #00e676; color: #000; font-weight: 900;
-      font-size: 0.75rem; padding: 4px 14px; border-radius: 50px; margin-bottom: 10px;
+      font-size: 0.72rem; padding: 4px 12px; border-radius: 50px; margin-bottom: 8px;
     }
-    .omega-modal-header h2 { font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .omega-modal-header p { font-size: 0.88rem; color: #aaa; margin-bottom: 15px; }
+    .omega-modal-header h2 { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .omega-modal-header p { font-size: 0.84rem; color: #aaa; margin-bottom: 12px; }
     .omega-price-tag {
       background: #1d1d24; border: 1px solid #2b2b36; border-radius: 12px;
-      padding: 14px; margin-bottom: 18px;
+      padding: 12px; margin-bottom: 16px;
     }
-    .omega-price-tag small { font-size: 0.75rem; color: #888; display: block; }
-    .price-value { font-size: 2.2rem; font-weight: 900; color: #ff9900; line-height: 1.1; }
-    .instant-tag { font-size: 0.78rem; color: #00e676; font-weight: 700; }
-    .omega-qr-container { margin-bottom: 18px; }
-    .omega-qr-img { width: 170px; height: 170px; border-radius: 12px; border: 4px solid #fff; margin-bottom: 10px; }
-    .qr-instruction { font-size: 0.82rem; color: #bbb; line-height: 1.4; }
-    .omega-copy-box { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+    .omega-price-tag small { font-size: 0.72rem; color: #888; display: block; }
+    .price-value { font-size: 2rem; font-weight: 900; color: #ff9900; line-height: 1.1; }
+    .instant-tag { font-size: 0.75rem; color: #00e676; font-weight: 700; }
+    .omega-qr-container { margin-bottom: 16px; }
+    .omega-qr-img { width: 150px; height: 150px; max-width: 100%; border-radius: 12px; border: 3px solid #fff; margin: 0 auto 10px auto; display: block; }
+    .qr-instruction { font-size: 0.8rem; color: #bbb; line-height: 1.35; padding: 0 4px; }
+    .omega-copy-box { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; width: 100%; box-sizing: border-box; }
     .omega-copy-box input {
       background: #0b0b0e; border: 1px solid #333; border-radius: 8px; color: #aaa;
       padding: 10px; font-size: 0.75rem; text-align: center; font-family: monospace;
+      width: 100%; box-sizing: border-box; word-break: break-all;
     }
     .btn-copy-pix {
-      background: #ff9900; color: #000; font-weight: 900; font-size: 0.9rem;
-      padding: 14px; border: none; border-radius: 8px; cursor: pointer;
+      background: #ff9900; color: #000; font-weight: 900; font-size: 0.88rem;
+      padding: 14px 12px; border: none; border-radius: 8px; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all 0.2s ease;
+      transition: all 0.2s ease; width: 100%; min-height: 50px; box-sizing: border-box;
+      line-height: 1.25; text-align: center;
     }
     .btn-copy-pix:hover { background: #ffaa22; }
-    .omega-timer-box { font-size: 0.8rem; color: #ff5500; margin-bottom: 15px; }
+    .omega-timer-box { font-size: 0.78rem; color: #ff5500; margin-bottom: 12px; }
     .omega-footer-status {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      font-size: 0.82rem; color: #aaa; margin-bottom: 5px;
+      font-size: 0.8rem; color: #aaa; margin-bottom: 5px;
     }
     .status-pulse {
       width: 10px; height: 10px; background: #00e676; border-radius: 50%;
-      box-shadow: 0 0 10px #00e676; animation: pulsePix 1.5s infinite;
+      box-shadow: 0 0 10px #00e676; animation: pulsePix 1.5s infinite; flex-shrink: 0;
     }
     @keyframes pulsePix { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } }
   `;

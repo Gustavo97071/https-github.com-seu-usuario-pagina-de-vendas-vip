@@ -610,27 +610,99 @@ body {
   margin-top: 5px;
 }
 
-/* Mobile Adjustments */
+/* Prevenção Absoluta de Scroll Horizontal & Reset Mobile-First */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+input, select, textarea, button {
+  font-size: 16px;
+  font-family: inherit;
+}
+
+/* Mobile Adjustments (320px até 480px) */
 @media (max-width: 480px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+  }
+
+  .verif-header {
+    padding: 12px 0;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .security-badge-top {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .progress-container {
+    padding: 10px 8px;
+    margin: 20px 0 18px 0;
+  }
+
+  .step-circle {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+  }
+
+  .progress-line {
+    margin-top: -14px;
+  }
+
   .main-title {
     font-size: 1.4rem;
+    line-height: 1.25;
+  }
+
+  .subtitle {
+    font-size: 0.88rem;
   }
   
   .big-price {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   .verification-card {
-    padding: 20px 16px;
+    padding: 20px 14px;
+    border-radius: var(--radius-md);
   }
 
   .reimbursement-banner {
     flex-direction: column;
+    text-align: center;
+    align-items: center;
     gap: 10px;
+    padding: 14px 12px;
   }
 
   .btn-verify-main {
-    font-size: 0.95rem;
-    padding: 16px 15px;
+    font-size: 0.92rem;
+    padding: 14px 12px;
+    min-height: 50px;
+    width: 100%;
+  }
+
+  .bullet-item {
+    font-size: 0.82rem;
   }
 }
