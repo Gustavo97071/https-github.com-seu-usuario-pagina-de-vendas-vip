@@ -1,32 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Lógica do Modal de Idade (+18)
-  const ageModal = document.getElementById('ageModal');
-  const btnAgeYes = document.getElementById('btnAgeYes');
-  const btnAgeNo = document.getElementById('btnAgeNo');
-
-  // Verifica se o usuário já confirmou a idade anteriormente
-  const isAdultConfirmed = localStorage.getItem('privacyhub_age_confirmed');
-
-  if (isAdultConfirmed === 'true') {
-    ageModal.style.display = 'none';
-  } else {
-    ageModal.style.display = 'flex';
-  }
-
-  btnAgeYes.addEventListener('click', () => {
-    localStorage.setItem('privacyhub_age_confirmed', 'true');
-    ageModal.style.animation = 'modalFadeOut 0.3s ease-forward';
-    setTimeout(() => {
-      ageModal.style.display = 'none';
-    }, 300);
-  });
-
-  btnAgeNo.addEventListener('click', () => {
-    alert('Acesso negado. Você será redirecionado.');
-    window.location.href = 'https://www.google.com';
-  });
-
-  // 2. Cronômetro Regressivo de Urgência (15 Minutos)
+  // 1. Cronômetro Regressivo de Urgência (15 Minutos)
   let totalSeconds = 15 * 60; // 15 minutos em segundos
 
   const elHours = document.getElementById('timerHours');
